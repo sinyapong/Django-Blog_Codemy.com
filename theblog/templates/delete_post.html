@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}ลบบทความ{% endblock title %}
+{% block content %} 
+
+<h1>ลบบทความ</h1><br>
+<h3>Delete : {{ post.title }}</h3>
+<div class="form-group">
+    <form method="POST">
+        {% csrf_token %}
+        <strong>คุณต้องการลบใช่หรือไม่</strong><br><br>
+        <button class="btn btn-secondary">ลบบทความ</button>
+    </form>
+</div>
+
+{% endblock content %}
