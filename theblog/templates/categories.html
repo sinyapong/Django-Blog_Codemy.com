@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}{{post.title_tag}}{% endblock title %}
+{% block content %} 
+
+
+{% if category_posts %}
+    <h1>{{cats}}</h1>
+    <ul>
+        {% for post in category_posts %}
+            <li>
+                <a href="{% url 'article-detail' post.pk %}">{{post.title}}</a> |
+                {{post.author.first_name}} 
+                {{post.author.last_name}} - 
+                <small>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'update_post' post.pk %}">(แก้ไข)</a>
+                        <a href="{% url 'delete_post' post.pk %}">(ลบ)</a>
+                    {% endif %}
+                </small>
+                <br>
+                - {{post.body|slice:":200"|safe}} <br>
+                {{ post.post_date }}
+            </li><br>
+        {% endfor %}
+    </ul>
+{% else %}
+    <h3>ไม่มีหมวดหมู่นี้</h3>
+{% endif %}
+
+{% endblock content %}
